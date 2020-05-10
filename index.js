@@ -7,14 +7,15 @@ const io = require('socket.io')(http);
 * 2.监听某一个客户端主动断开与服务端的socket连接:socket.on('disconnect',callback) 此处的socket是客户端的实例
 * */
 io.on('connect', socket => {
-  console.log(socket.client)
   //此处的socket就是只特定的跟服务器建立了socket连接的客户端 有唯一的id属性
-  console.log(`a user named ${socket.id} connected at ${new Date()}`);
+  console.log(`a client named ${socket.id} connected at ${new Date()}`);
   //socket.emit('事件名',要传递给该客户端的值)
   socket.emit('data', {
     name: '伊万卡',
-    age: 39,
+    age: 12,
     id: socket.id
+  }, data => {
+    console.log(data)
   });
 
   //监听客户端主动断开事件
